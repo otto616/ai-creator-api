@@ -29,10 +29,12 @@ git clone [https://github.com/otto616/ai-creator-api.git](https://github.com/ott
 cd ai-creator-api
 
 ### 2. Set Env Variables
+```bash
 Create a .env file in the root directory. You will need a Hugging Face Access Token:
 HUGGINGFACE_TOKEN=your_hf_token_here
 
 ### 3. Run With Docker
+```bash
 docker-compose up -d --build
 Once the container is up, visit http://localhost:8000/docs to test the endpoints.
 
