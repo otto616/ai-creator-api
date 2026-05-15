@@ -8,7 +8,7 @@ router = APIRouter()
 
 @router.post("/summarize", response_model=SummarizedResponse)
 @limiter.limit("8/minute")
-def create_summary(request: TextRequest, body: TextRequest):
+def create_summary(request: Request, body: TextRequest):
     try:
         # Validated text by Pydantic to our AI sum func.
         result_text = sum_text_with_ai(body.text)
@@ -20,7 +20,7 @@ def create_summary(request: TextRequest, body: TextRequest):
 
 @router.post("/titles", response_model=TitlesResponse)
 @limiter.limit("8/minute")
-def create_viral_titles(request: TextRequest, body: TextRequest):
+def create_viral_titles(request: Request, body: TextRequest):
     try:
         # Re-use TextRequest for Pydantic validation
         result_titles = generate_viral_titles(body.text)
@@ -31,7 +31,7 @@ def create_viral_titles(request: TextRequest, body: TextRequest):
 
 @router.post("/hashtags", response_model=HashtagsResponse)
 @limiter.limit("8/minute")
-def create_hashtags(request: TextRequest, body: TextRequest):
+def create_hashtags(request: Request, body: TextRequest):
     try:
         result_hashtags = generate_hashtags(body.text)
         return HashtagsResponse(hashtags=result_hashtags, success=True)
@@ -41,7 +41,7 @@ def create_hashtags(request: TextRequest, body: TextRequest):
 
 @router.post("/translate", response_model=TranslateResponse)
 @limiter.limit("8/minute")
-def create_translate(request: TextRequest, body: TextRequest):
+def create_translate(request: Request, body: TextRequest):
     try:
         result_translated = translate_english(body.text)
         return TranslateResponse(translated=result_translated, success=True)
