@@ -10,6 +10,7 @@ HUGGINGFACE_TOKEN = os.getenv("HUGGINGFACE_API_KEY")
 # Facebook model specialized in summarizing text
 API_URL = "https://router.huggingface.co/hf-inference/models/facebook/bart-large-cnn"
 headers = {"Authorization": f"Bearer {HUGGINGFACE_TOKEN}"}
+CHAT_MODEL = "meta-llama/Meta-Llama-3-8B-Instruct"
 
 def sum_text_with_ai(text_to_process: str):
     payload = {
@@ -37,7 +38,7 @@ def sum_text_with_ai(text_to_process: str):
 
 
 def generate_viral_titles(text_to_process: str):
-    client = InferenceClient(model="meta-llama/Llama-3.2-1B-Instruct", token=HUGGINGFACE_TOKEN)
+    client = InferenceClient(model=CHAT_MODEL, token=HUGGINGFACE_TOKEN)
     
     messages = [
         {"role": "system", "content": "You are a digital marketing expert. Return ONLY 5 titles, one per line, with no extra comments or numbering."},
@@ -62,7 +63,7 @@ def generate_viral_titles(text_to_process: str):
 
 
 def generate_hashtags(text_to_process: str):
-    client = InferenceClient(model="meta-llama/Llama-3.2-1B-Instruct", token=HUGGINGFACE_TOKEN)
+    client = InferenceClient(model=CHAT_MODEL, token=HUGGINGFACE_TOKEN)
 
     messages = [
         {
@@ -98,4 +99,3 @@ def translate_english(text_to_process: str):
 
     except Exception as e:
         raise Exception(f"Error in HF: {str(e)}")
-
